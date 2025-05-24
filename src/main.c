@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <allegro5/allegro.h>
+#include "pages/game/game_page.h"
 
 int main(int argc, char **argv) {
     if (!al_init()) {
@@ -7,9 +8,10 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    printf("Allegro inicializado com sucesso!\n");
-    printf("Pressione Enter para sair...");
-    getchar();
+    if (!run_game()) {
+        printf("Erro ao iniciar a tela principal do jogo!\n");
+        return -1;
+    }
 
     return 0;
 }
