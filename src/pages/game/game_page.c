@@ -19,7 +19,7 @@ void run_game() {
     al_clear_to_color(al_map_rgb(0, 0, 0));
     al_flip_display();
 
-    al_rest(5.0);
+    al_rest(TESTING_DELAY);
 
     al_destroy_display(display);
 }

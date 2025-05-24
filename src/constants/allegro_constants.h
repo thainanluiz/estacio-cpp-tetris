@@ -4,4 +4,6 @@
 #define SCREEN_WIDTH 360
 #define SCREEN_HEIGHT 640
 
+#define TESTING_DELAY 5
+
 #endif
