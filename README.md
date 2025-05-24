@@ -48,4 +48,4 @@ README.md    # Este arquivo
 ## Observações
 
 - O projeto está em desenvolvimento.
-- Se der erro de Allegro, confira se as DLLs estão na pasta `bin` ou no PATH do Windows.
+- Se der erro de Allegro 5, confira se as DLLs estão na pasta `bin` ou no PATH do Windows.
