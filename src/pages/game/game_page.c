@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
-#include "game_page.h"
+#include "pages/game/game_page.h"
 #include "constants/allegro_constants.h"
 
 void run_game() {
