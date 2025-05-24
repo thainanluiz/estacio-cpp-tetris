@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "allegro_primitives.h": "c",
+    "game_page.h": "c"
+  }
+}
