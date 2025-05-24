@@ -10,7 +10,7 @@ Projeto feito para a disciplina de Programação de Software Básico em C na Est
 
 ## O que você precisa pra rodar
 
-- Windows com MinGW-w64 instalado ([download disponivel neste link](https://www.mingw-w64.org/))
+- Windows com MinGW-w64 instalado ([download disponível neste link](https://www.mingw-w64.org/))
 - Allegro 5 já baixado e configurado (as DLLs e includes estão na pasta `libs`)
 - Terminal com `mingw32-make` funcionando
 
