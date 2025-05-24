@@ -7,7 +7,6 @@
 void run_game() {
     ALLEGRO_DISPLAY *display = NULL;
 
-    al_init();
     al_init_primitives_addon();
 
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
