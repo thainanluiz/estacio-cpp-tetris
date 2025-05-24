@@ -1,0 +1,7 @@
+#ifndef ALLEGRO_CONSTANTS_H
+#define ALLEGRO_CONSTANTS_H
+
+#define SCREEN_WIDTH 360
+#define SCREEN_HEIGHT 640
+
+#endif
