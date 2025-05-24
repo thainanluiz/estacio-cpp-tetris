@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include "game_page.h"
@@ -11,6 +12,7 @@ void run_game() {
 
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!display) {
+        printf("Erro ao instanciar a tela!\n");
         return;
     }
 
