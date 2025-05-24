@@ -4,7 +4,7 @@
 #include "pages/game/game_page.h"
 #include "constants/allegro_constants.h"
 
-void run_game() {
+bool run_game() {
     ALLEGRO_DISPLAY *display = NULL;
 
     al_init_primitives_addon();
@@ -12,7 +12,7 @@ void run_game() {
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!display) {
         printf("Erro ao instanciar a tela!\n");
-        return;
+        return false;
     }
 
     al_clear_to_color(al_map_rgb(0, 0, 0));
@@ -21,4 +21,5 @@ void run_game() {
     al_rest(TESTING_DELAY);
 
     al_destroy_display(display);
+    return true;
 }

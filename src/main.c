@@ -8,7 +8,10 @@ int main(int argc, char **argv) {
         return -1;
     }
 
-    run_game();
+    if (!run_game()) {
+        printf("Erro ao iniciar a tela principal do jogo!\n");
+        return -1;
+    }
 
     return 0;
 }
