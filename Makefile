@@ -2,7 +2,7 @@
 CC = gcc
 
 # Define os arquivos fonte a serem compilados
-SRC = src/main.c src/pages/game/game_page.c
+SRC = src/main.c src/pages/game/game_page.c src/components/block/block.c
 
 # Define o nome e caminho do arquivo executável final
 BIN = bin/lletris.exe

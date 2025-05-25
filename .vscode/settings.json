@@ -3,6 +3,8 @@
     "allegro_primitives.h": "c",
     "game_page.h": "c",
     "allegro_constants.h": "c",
-    "stdio.h": "c"
+    "stdio.h": "c",
+    "allegro_image.h": "c",
+    "block.h": "c"
   }
 }
