@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
-#include "pages/game/game_page.h"
 #include "constants/allegro_constants.h"
+#include "pages/game/game_page.h"
 
 bool run_game() {
     ALLEGRO_DISPLAY *display = NULL;
