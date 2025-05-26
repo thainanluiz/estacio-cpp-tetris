@@ -98,10 +98,9 @@ bool run_game() {
 
     al_init_font_addon();
     al_init_ttf_addon();
-    ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0);; // Caminho e tamanho ajustáveis
+    ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0); // Caminho e tamanho ajustáveis
     if (!font) {
         printf("Erro ao carregar a fonte!\n");
-        al_destroy_display(display);
         al_destroy_font(font);
         return false;
     }
@@ -265,7 +264,7 @@ bool run_game() {
 
                 al_flip_display();
             }
-        } else if (ev.timer.source == cronometro.timer) {
+        } else if (ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == cronometro.timer) {
             atualizar_cronometro(&cronometro);
         }
     }
