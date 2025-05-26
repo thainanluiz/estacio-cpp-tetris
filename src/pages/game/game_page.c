@@ -6,12 +6,11 @@
 #include <allegro5/allegro_image.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
+#include <stdbool.h>
+#include "constants/allegro_constants.h"
 #include "components/block/block.h"
 #include "components/cronometro/cronometro.h"
-#include <stdbool.h>
 
-#define SCREEN_WIDTH  400
-#define SCREEN_HEIGHT 600
 #define BLOCK_SIZE    20
 
 #define FIELD_WIDTH  (SCREEN_WIDTH / BLOCK_SIZE)
@@ -96,6 +95,16 @@ bool run_game() {
     al_init();
     al_init_primitives_addon();
     al_init_image_addon();
+
+    al_init_font_addon();
+    al_init_ttf_addon();
+    ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0);; // Caminho e tamanho ajustáveis
+    if (!font) {
+        printf("Erro ao carregar a fonte!\n");
+        al_destroy_display(display);
+        al_destroy_font(font);
+        return false;
+    }
 
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!display) {
@@ -245,6 +254,15 @@ bool run_game() {
                         color_map(b.color)
                     );
                 }
+
+                char tempo_str[16];
+                snprintf(tempo_str, sizeof(tempo_str), "%02d:%02d", cronometro.minutos, cronometro.segundos);
+
+                int text_width = al_get_text_width(font, tempo_str);
+                int text_height = al_get_font_line_height(font);
+
+                al_draw_text(font, al_map_rgb(255, 255, 255), 10, SCREEN_HEIGHT - text_height - 10, 0, tempo_str);
+
                 al_flip_display();
             }
         } else if (ev.timer.source == cronometro.timer) {
