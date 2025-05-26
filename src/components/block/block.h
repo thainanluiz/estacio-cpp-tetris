@@ -22,6 +22,7 @@ typedef struct {
     TetrominoType type;
 } Tetromino;
 
-Tetromino create_tetromino(TetrominoType type, int x, int y, int color);
+Tetromino create_tetromino(TetrominoType type, int x, int y, int color, int random_colors);
+void rotate_tetromino(Tetromino *tet, int direction, int pivot_x, int pivot_y);
 
 #endif
