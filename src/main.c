@@ -5,15 +5,18 @@
 int main(int argc, char **argv) {
     if (!al_init()) {
         printf("Erro ao inicializar o Allegro!\n");
-        scanf("%*s");
+        getchar();
         return -1;
     }
+    printf("Allegro iniciado com sucesso!\n");
 
     if (!run_game()) {
         printf("Erro ao iniciar a tela principal do jogo!\n");
-        scanf("%*s");
+        getchar();
         return -1;
     }
 
+    printf("run_game finalizado normalmente\n");
+    getchar(); // Pausa antes de fechar o console
     return 0;
 }

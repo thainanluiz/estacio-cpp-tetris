@@ -4,10 +4,13 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <stdbool.h>
+#include "constants/allegro_constants.h"
 #include "components/block/block.h"
+#include "components/cronometro/cronometro.h"
 
-#define SCREEN_WIDTH  400
-#define SCREEN_HEIGHT 600
 #define BLOCK_SIZE    20
 
 #define FIELD_WIDTH  (SCREEN_WIDTH / BLOCK_SIZE)
@@ -87,10 +90,20 @@ bool run_game() {
     ALLEGRO_BITMAP *background = NULL;
     ALLEGRO_EVENT_QUEUE *queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
+    Cronometro cronometro = criar_cronometro();
 
     al_init();
     al_init_primitives_addon();
     al_init_image_addon();
+
+    al_init_font_addon();
+    al_init_ttf_addon();
+    ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0); // Caminho e tamanho ajustáveis
+    if (!font) {
+        printf("Erro ao carregar a fonte!\n");
+        al_destroy_font(font);
+        return false;
+    }
 
     display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!display) {
@@ -108,9 +121,11 @@ bool run_game() {
     srand((unsigned int)time(NULL));
 
     timer = al_create_timer(1.0 / 60.0);
+    al_start_timer(cronometro.timer);
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_display_event_source(display));
     al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, al_get_timer_event_source(cronometro.timer));
     al_install_keyboard();
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_install_mouse();
@@ -171,6 +186,7 @@ bool run_game() {
             }
         }
         else if (ev.type == ALLEGRO_EVENT_TIMER) {
+            if (ev.timer.source == timer) {
             frame_counter++;
 
             int move_up_steps = 0;
@@ -237,8 +253,19 @@ bool run_game() {
                         color_map(b.color)
                     );
                 }
+
+                char tempo_str[16];
+                snprintf(tempo_str, sizeof(tempo_str), "%02d:%02d", cronometro.minutos, cronometro.segundos);
+
+                int text_width = al_get_text_width(font, tempo_str);
+                int text_height = al_get_font_line_height(font);
+
+                al_draw_text(font, al_map_rgb(255, 255, 255), 10, SCREEN_HEIGHT - text_height - 10, 0, tempo_str);
+
                 al_flip_display();
             }
+        } else if (ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == cronometro.timer) {
+            atualizar_cronometro(&cronometro);
         }
     }
 
@@ -246,5 +273,7 @@ bool run_game() {
     al_destroy_event_queue(queue);
     al_destroy_bitmap(background);
     al_destroy_display(display);
+    destruir_cronometro(&cronometro);
     return true;
+}
 }
