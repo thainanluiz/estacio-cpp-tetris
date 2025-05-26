@@ -4,7 +4,11 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_primitives.h>
 #include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 #include "components/block/block.h"
+#include "components/cronometro/cronometro.h"
+#include <stdbool.h>
 
 #define SCREEN_WIDTH  400
 #define SCREEN_HEIGHT 600
@@ -87,6 +91,7 @@ bool run_game() {
     ALLEGRO_BITMAP *background = NULL;
     ALLEGRO_EVENT_QUEUE *queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
+    Cronometro cronometro = criar_cronometro();
 
     al_init();
     al_init_primitives_addon();
@@ -108,9 +113,11 @@ bool run_game() {
     srand((unsigned int)time(NULL));
 
     timer = al_create_timer(1.0 / 60.0);
+    al_start_timer(cronometro.timer);
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_display_event_source(display));
     al_register_event_source(queue, al_get_timer_event_source(timer));
+    al_register_event_source(queue, al_get_timer_event_source(cronometro.timer));
     al_install_keyboard();
     al_register_event_source(queue, al_get_keyboard_event_source());
     al_install_mouse();
@@ -171,6 +178,7 @@ bool run_game() {
             }
         }
         else if (ev.type == ALLEGRO_EVENT_TIMER) {
+            if (ev.timer.source == timer) {
             frame_counter++;
 
             int move_up_steps = 0;
@@ -239,6 +247,8 @@ bool run_game() {
                 }
                 al_flip_display();
             }
+        } else if (ev.timer.source == cronometro.timer) {
+            atualizar_cronometro(&cronometro);
         }
     }
 
@@ -246,5 +256,7 @@ bool run_game() {
     al_destroy_event_queue(queue);
     al_destroy_bitmap(background);
     al_destroy_display(display);
+    destruir_cronometro(&cronometro);
     return true;
+}
 }
