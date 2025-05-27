@@ -95,9 +95,9 @@ bool run_game() {
     al_init();
     al_init_primitives_addon();
     al_init_image_addon();
-
     al_init_font_addon();
     al_init_ttf_addon();
+
     ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0); // Caminho e tamanho ajustáveis
     if (!font) {
         printf("Erro ao carregar a fonte!\n");
@@ -121,7 +121,14 @@ bool run_game() {
     srand((unsigned int)time(NULL));
 
     timer = al_create_timer(1.0 / 60.0);
+    if(!timer) {
+        printf("Erro ao criar o time do jogo!\n");
+        return false;
+    }
+    al_start_timer(timer);
+
     al_start_timer(cronometro.timer);
+
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_display_event_source(display));
     al_register_event_source(queue, al_get_timer_event_source(timer));
@@ -185,8 +192,7 @@ bool run_game() {
                 if (!check_collision(&rotated)) current = rotated;
             }
         }
-        else if (ev.type == ALLEGRO_EVENT_TIMER) {
-            if (ev.timer.source == timer) {
+        else if (ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == timer) {
             frame_counter++;
 
             int move_up_steps = 0;
@@ -275,5 +281,4 @@ bool run_game() {
     al_destroy_display(display);
     destruir_cronometro(&cronometro);
     return true;
-}
 }
