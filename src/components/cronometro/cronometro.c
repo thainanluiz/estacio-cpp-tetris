@@ -1,10 +1,12 @@
-#include "cronometro.h"
 #include <stdio.h>
+#include "components/cronometro/cronometro.h"
 
-Cronometro criar_cronometro(void) {
+Cronometro criar_cronometro(void)
+{
     Cronometro c;
-    c.timer = al_create_timer(1.0); // timer 1 segundo
-    if (!c.timer) {
+    c.timer = al_create_timer(1.0);
+    if (!c.timer)
+    {
         fprintf(stderr, "Falha ao criar o timer do cronômetro.\n");
         exit(EXIT_FAILURE);
     }
@@ -13,16 +15,20 @@ Cronometro criar_cronometro(void) {
     return c;
 }
 
-void atualizar_cronometro(Cronometro *c) {
+void atualizar_cronometro(Cronometro *c)
+{
     c->segundos++;
-    if (c->segundos >= 60) {
+    if (c->segundos >= 60)
+    {
         c->segundos = 0;
         c->minutos++;
     }
 }
 
-void destruir_cronometro(Cronometro *c) {
-    if (c->timer) {
+void destruir_cronometro(Cronometro *c)
+{
+    if (c->timer)
+    {
         al_destroy_timer(c->timer);
         c->timer = NULL;
     }

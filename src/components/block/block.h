@@ -1,12 +1,14 @@
 #ifndef BLOCK_H
 #define BLOCK_H
 
-typedef struct {
+typedef struct
+{
     int x, y;
     int color;
 } Block;
 
-typedef enum {
+typedef enum
+{
     TETROMINO_I,
     TETROMINO_O,
     TETROMINO_T,
@@ -17,7 +19,8 @@ typedef enum {
     TETROMINO_COUNT
 } TetrominoType;
 
-typedef struct {
+typedef struct
+{
     Block blocks[4];
     TetrominoType type;
 } Tetromino;

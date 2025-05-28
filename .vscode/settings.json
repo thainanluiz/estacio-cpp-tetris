@@ -7,6 +7,9 @@
     "allegro_image.h": "c",
     "block.h": "c",
     "allegro_font.h": "c",
-    "allegro.h": "c"
+    "allegro.h": "c",
+    "allegro_ttf.h": "c",
+    "stdlib.h": "c",
+    "placar.h": "c"
   }
 }
