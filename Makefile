@@ -6,6 +6,7 @@ SRC = src/main.c
 SRC += src/pages/game/game_page.c
 SRC += src/components/block/block.c
 SRC += src/components/cronometro/cronometro.c
+SRC	+= src/components/placar/placar.c
 
 # Define o nome e caminho do arquivo executável final
 BIN = bin/lletris.exe
@@ -17,7 +18,7 @@ INCLUDES = -Ilibs/include -Isrc
 LIBDIRS = -Llibs/lib
 
 # Define as bibliotecas a serem linkadas
-LIBS = -lallegro -lallegro_main -lallegro_image -lallegro_font -lallegro_ttf -lallegro_primitives
+LIBS = -lallegro -lallegro_main -lallegro_image -lallegro_font -lallegro_ttf -lallegro_primitives -lallegro_dialog
 
 # Define o diretório de origem dos assets
 ASSETS_SRC_DIR = assets
