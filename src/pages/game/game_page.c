@@ -14,12 +14,7 @@
 #include "components/placar/placar.h"
 #include "pages/game_over/game_over_page.h"
 #include "pages/menu/menu_page.h"
-
-
-#define BLOCK_SIZE 20
-
-#define FIELD_WIDTH (SCREEN_WIDTH / BLOCK_SIZE)
-#define FIELD_HEIGHT (SCREEN_HEIGHT / BLOCK_SIZE)
+#include "components/field/field_utils.h"
 
 #define SPAWN_POS_X (FIELD_WIDTH / 2)
 #define SPAWN_POS_Y (FIELD_HEIGHT - 2)
@@ -110,6 +105,8 @@ int clear_full_lines()
 
 bool run_game(ALLEGRO_DISPLAY *display)
 {
+    clear_field();
+
     ALLEGRO_BITMAP *background = NULL;
     ALLEGRO_EVENT_QUEUE *queue = NULL;
     ALLEGRO_TIMER *timer = NULL;

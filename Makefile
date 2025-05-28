@@ -6,6 +6,7 @@ SRC = src/main.c
 SRC += src/pages/menu/menu_page.c
 SRC += src/pages/game/game_page.c
 SRC += src/pages/game_over/game_over_page.c
+SRC += src/components/field/field_utils.c
 SRC += src/components/block/block.c
 SRC += src/components/button/button.c
 SRC += src/components/cronometro/cronometro.c
