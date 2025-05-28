@@ -10,6 +10,7 @@
 #include "constants/allegro_constants.h"
 #include "components/block/block.h"
 #include "components/cronometro/cronometro.h"
+#include "components/placar/placar.h"
 
 #define BLOCK_SIZE    20
 
@@ -59,7 +60,8 @@ ALLEGRO_COLOR color_map(int color) {
     }
 }
 
-void clear_full_lines() {
+int clear_full_lines() {
+    int lines_cleared = 0;
     for (int y = 0; y < FIELD_HEIGHT; y++) {
         int full = 1;
         for (int x = 0; x < FIELD_WIDTH; x++) {
@@ -81,8 +83,10 @@ void clear_full_lines() {
             }
             // Verifica a mesma linha novamente (pois ela agora tem a linha de cima)
             y--;
+            lines_cleared++;
         }
     }
+    return lines_cleared;
 }
 
 bool run_game() {
@@ -95,9 +99,10 @@ bool run_game() {
     al_init();
     al_init_primitives_addon();
     al_init_image_addon();
-
     al_init_font_addon();
     al_init_ttf_addon();
+    inicializar_placar();
+
     ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0); // Caminho e tamanho ajustáveis
     if (!font) {
         printf("Erro ao carregar a fonte!\n");
@@ -121,7 +126,14 @@ bool run_game() {
     srand((unsigned int)time(NULL));
 
     timer = al_create_timer(1.0 / 60.0);
+    if(!timer) {
+        al_show_native_message_box(NULL, "Erro", "Erro crítico", "Erro ao criar o timer do jogo!", NULL, ALLEGRO_MESSAGEBOX_ERROR);
+        return false;
+    }
+    al_start_timer(timer);
+
     al_start_timer(cronometro.timer);
+
     queue = al_create_event_queue();
     al_register_event_source(queue, al_get_display_event_source(display));
     al_register_event_source(queue, al_get_timer_event_source(timer));
@@ -185,8 +197,7 @@ bool run_game() {
                 if (!check_collision(&rotated)) current = rotated;
             }
         }
-        else if (ev.type == ALLEGRO_EVENT_TIMER) {
-            if (ev.timer.source == timer) {
+        else if (ev.type == ALLEGRO_EVENT_TIMER && ev.timer.source == timer) {
             frame_counter++;
 
             int move_up_steps = 0;
@@ -206,7 +217,10 @@ bool run_game() {
                 if (check_collision(&next_pos)) {
                     // Colisão, a peça não pode subir mais
                     fix_tetromino(&current);
-                    clear_full_lines();
+                    int linhas = clear_full_lines();
+                    if (linhas > 0) {
+                        adicionar_pontos(linhas);
+                    }
 
                     // Gera novo tetromino
                     cor_aleatoria = 1 + rand() % 7;
@@ -261,6 +275,7 @@ bool run_game() {
                 int text_height = al_get_font_line_height(font);
 
                 al_draw_text(font, al_map_rgb(255, 255, 255), 10, SCREEN_HEIGHT - text_height - 10, 0, tempo_str);
+                desenhar_placar();
 
                 al_flip_display();
             }
@@ -275,5 +290,4 @@ bool run_game() {
     al_destroy_display(display);
     destruir_cronometro(&cronometro);
     return true;
-}
 }
