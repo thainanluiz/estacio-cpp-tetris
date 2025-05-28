@@ -127,7 +127,7 @@ bool run_game() {
 
     timer = al_create_timer(1.0 / 60.0);
     if(!timer) {
-        printf("Erro ao criar o time do jogo!\n");
+        al_show_native_message_box(NULL, "Erro", "Erro crítico", "Erro ao criar o timer do jogo!", NULL, ALLEGRO_MESSAGEBOX_ERROR);
         return false;
     }
     al_start_timer(timer);
