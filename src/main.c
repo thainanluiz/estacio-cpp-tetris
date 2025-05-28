@@ -8,6 +8,8 @@
 #include "constants/allegro_constants.h"
 #include "pages/menu/menu_page.h"
 #include "pages/game/game_page.h"
+#include "pages/game_over/game_over_page.h"
+
 
 int main()
 {
@@ -72,13 +74,13 @@ int main()
         }
         else if (current_app_state == GAME_STATE_PLAYING)
         {
-            if (run_game())
+            if (run_game(display))
             {
                 current_app_state = GAME_STATE_MENU;
             }
             else
             {
-                current_app_state = GAME_STATE_MENU;
+                current_app_state = run_game_over(display, font_main_buttons);
             }
         }
     }

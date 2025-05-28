@@ -12,6 +12,9 @@
     "stdlib.h": "c",
     "placar.h": "c",
     "allegro_native_dialog.h": "c",
-    "button.h": "c"
+    "button.h": "c",
+    "menu_page.h": "c",
+    "game_over_page.h": "c",
+    "stdbool.h": "c"
   }
 }
