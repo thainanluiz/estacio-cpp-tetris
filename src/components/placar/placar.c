@@ -11,7 +11,7 @@ static ALLEGRO_FONT *fonte_placar = NULL;
 
 void inicializar_placar()
 {
-    fonte_placar = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0);
+    fonte_placar = al_load_ttf_font(ALLEGRO_FONT_C, 24, 0);
     if (!fonte_placar)
     {
         al_show_native_message_box(NULL, "Erro", "Fonte", "Não foi possível carregar a fonte do placar!", NULL, ALLEGRO_MESSAGEBOX_ERROR);

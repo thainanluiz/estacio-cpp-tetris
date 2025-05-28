@@ -49,10 +49,10 @@ int main()
     }
     al_set_window_title(display, "Lletris");
 
-    font_main_buttons = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0);
+    font_main_buttons = al_load_ttf_font(ALLEGRO_FONT_C, 24, 0);
     if (!font_main_buttons)
     {
-        font_main_buttons = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0);
+        font_main_buttons = al_load_ttf_font(ALLEGRO_FONT_C, 24, 0);
         if (!font_main_buttons)
         {
             fprintf(stderr, "Falha ao carregar a fonte para os botões. Verifique o caminho 'assets/fonts/PixelOperator.ttf'.\n");
