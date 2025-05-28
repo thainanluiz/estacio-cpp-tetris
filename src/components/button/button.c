@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <allegro5/allegro_primitives.h>
@@ -38,7 +39,7 @@ void update_button_state(Button *button, ALLEGRO_MOUSE_STATE *mouse_state, ALLEG
     {
         button->is_pressed = true;
     }
-    else if (event_type == ALLEGRO_EVENT_MOUSE_BUTTON_UP && mouse_state->buttons & 1 && button->is_pressed)
+    else if (event_type == ALLEGRO_EVENT_MOUSE_BUTTON_UP && button->is_pressed)
     {
         if (mouse_over)
         {

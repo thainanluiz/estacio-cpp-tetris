@@ -10,6 +10,8 @@
     "allegro.h": "c",
     "allegro_ttf.h": "c",
     "stdlib.h": "c",
-    "placar.h": "c"
+    "placar.h": "c",
+    "allegro_native_dialog.h": "c",
+    "button.h": "c"
   }
 }
