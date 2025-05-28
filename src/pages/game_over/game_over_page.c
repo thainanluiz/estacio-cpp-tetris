@@ -5,6 +5,7 @@
 #include "pages/game/game_page.h"
 #include "pages/menu/menu_page.h"
 #include "components/button/button.h"
+#include "components/field/field_utils.h"
 
 static GameState current_game_state;
 

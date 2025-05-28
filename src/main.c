@@ -9,6 +9,7 @@
 #include "pages/menu/menu_page.h"
 #include "pages/game/game_page.h"
 #include "pages/game_over/game_over_page.h"
+#include "components/field/field_utils.h"
 
 
 int main()

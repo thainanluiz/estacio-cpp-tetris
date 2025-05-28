@@ -15,6 +15,8 @@
     "button.h": "c",
     "menu_page.h": "c",
     "game_over_page.h": "c",
-    "stdbool.h": "c"
+    "stdbool.h": "c",
+    "cronometro.h": "c",
+    "field_utils.h": "c"
   }
 }
