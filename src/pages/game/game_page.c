@@ -12,6 +12,9 @@
 #include "components/block/block.h"
 #include "components/cronometro/cronometro.h"
 #include "components/placar/placar.h"
+#include "pages/game_over/game_over_page.h"
+#include "pages/menu/menu_page.h"
+
 
 #define BLOCK_SIZE 20
 
@@ -105,9 +108,8 @@ int clear_full_lines()
     return lines_cleared;
 }
 
-bool run_game()
+bool run_game(ALLEGRO_DISPLAY *display)
 {
-    ALLEGRO_DISPLAY *display = NULL;
     ALLEGRO_BITMAP *background = NULL;
     ALLEGRO_EVENT_QUEUE *queue = NULL;
     ALLEGRO_TIMER *timer = NULL;
@@ -128,7 +130,6 @@ bool run_game()
         return false;
     }
 
-    display = al_create_display(SCREEN_WIDTH, SCREEN_HEIGHT);
     if (!display)
     {
         printf("Erro ao instanciar a tela!\n");
@@ -139,7 +140,6 @@ bool run_game()
     if (!background)
     {
         printf("Erro ao carregar a imagem de fundo!\n");
-        al_destroy_display(display);
         return false;
     }
 
@@ -176,6 +176,7 @@ bool run_game()
     al_start_timer(timer);
 
     int running = 1;
+    bool perdeu = false;
     int accelerate = 0;
     int frame_counter = 0;
     int move_interval = 20; // Tecnicamente aqui é o número de frames antes de mover para cima
@@ -188,6 +189,7 @@ bool run_game()
         if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         {
             running = 0;
+            perdeu = false;
         }
         else if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
         {
@@ -279,6 +281,7 @@ bool run_game()
                     if (check_collision(&current))
                     {
                         running = 0;
+                        perdeu = true;
                     }
                     break;
                 }
@@ -336,7 +339,8 @@ bool run_game()
     al_destroy_timer(timer);
     al_destroy_event_queue(queue);
     al_destroy_bitmap(background);
-    al_destroy_display(display);
     destruir_cronometro(&cronometro);
-    return true;
+    
+    return !perdeu;
 }
+
