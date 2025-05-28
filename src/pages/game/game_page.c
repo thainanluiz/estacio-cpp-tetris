@@ -170,7 +170,7 @@ bool run_game()
         SPAWN_POS_X,
         SPAWN_POS_Y,
         cor_aleatoria,
-        0 // NÃO usar cores aleatórias por bloco <- P/THAINAN
+        0 // NÃO usar cores aleatórias por bloco
     );
 
     al_start_timer(timer);
