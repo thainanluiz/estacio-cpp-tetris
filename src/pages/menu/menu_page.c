@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_image.h>
 #include "constants/allegro_constants.h"
 #include "pages/game/game_page.h"
 #include "pages/menu/menu_page.h"
@@ -22,6 +23,12 @@ void action_exit_game()
 GameState run_menu(ALLEGRO_DISPLAY *display, ALLEGRO_FONT *font_buttons)
 {
   current_game_state = GAME_STATE_MENU;
+
+  ALLEGRO_BITMAP *background = al_load_bitmap("assets/images/bg_m.png");
+  if (!background)
+  {
+    fprintf(stderr, "Falha ao carregar a imagem de fundo do menu.\n");
+  }
 
   ALLEGRO_EVENT_QUEUE *menu_event_queue = al_create_event_queue();
   if (!menu_event_queue)
@@ -61,13 +68,25 @@ GameState run_menu(ALLEGRO_DISPLAY *display, ALLEGRO_FONT *font_buttons)
       running_menu = false;
     }
 
-    al_clear_to_color(al_map_rgb(30, 30, 30));
+    if (background)
+    {
+      al_draw_bitmap(background, 0, 0, 0);
+    }
+    else
+    {
+      al_clear_to_color(al_map_rgb(30, 30, 30));
+    }
+
     draw_button(&btn_start);
     draw_button(&btn_exit);
     al_flip_display();
   }
 
   al_destroy_event_queue(menu_event_queue);
+  if (background)
+  {
+    al_destroy_bitmap(background);
+  }
 
   return current_game_state;
 }

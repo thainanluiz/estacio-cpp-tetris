@@ -120,7 +120,7 @@ bool run_game()
     al_init_ttf_addon();
     inicializar_placar();
 
-    ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_ARIAL, 24, 0);
+    ALLEGRO_FONT *font = al_load_ttf_font(ALLEGRO_FONT_C, 24, 0);
     if (!font)
     {
         printf("Erro ao carregar a fonte!\n");
@@ -135,7 +135,7 @@ bool run_game()
         return false;
     }
 
-    background = al_load_bitmap("assets/images/game_bg_placeholder.png");
+    background = al_load_bitmap("assets/images/bg_1.png");
     if (!background)
     {
         printf("Erro ao carregar a imagem de fundo!\n");
