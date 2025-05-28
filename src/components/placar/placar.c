@@ -4,7 +4,7 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_native_dialog.h>
 #include "constants/allegro_constants.h"
-#include "placar.h"
+#include "components/placar/placar.h"
 
 static int pontuacao = 0;
 static ALLEGRO_FONT *fonte_placar = NULL;
