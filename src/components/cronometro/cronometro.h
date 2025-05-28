@@ -3,7 +3,8 @@
 
 #include <allegro5/allegro.h>
 
-typedef struct {
+typedef struct
+{
     ALLEGRO_TIMER *timer;
     int segundos;
     int minutos;
