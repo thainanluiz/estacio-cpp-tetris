@@ -21,9 +21,10 @@ struct Button
   bool is_hovered;
   bool is_pressed;
   ButtonAction action;
+  ALLEGRO_SAMPLE *click_sound;
 };
 
-Button create_button(float x, float y, float width, float height, const char *text, ALLEGRO_FONT *font, ButtonAction action);
+Button create_button(float x, float y, float width, float height, const char *text, ALLEGRO_FONT *font, ButtonAction action, ALLEGRO_SAMPLE *click_sound);
 void update_button_state(Button *button, ALLEGRO_MOUSE_STATE *mouse_state, ALLEGRO_EVENT_TYPE event_type);
 void draw_button(Button *button);
 void handle_button_click(Button *button);

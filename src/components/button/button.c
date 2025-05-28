@@ -2,9 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 #include "components/button/button.h"
 
-Button create_button(float x, float y, float width, float height, const char *text, ALLEGRO_FONT *font, ButtonAction action)
+Button create_button(float x, float y, float width, float height, const char *text, ALLEGRO_FONT *font, ButtonAction action, ALLEGRO_SAMPLE *click_sound)
 {
     Button btn;
     btn.x = x;
@@ -14,6 +16,7 @@ Button create_button(float x, float y, float width, float height, const char *te
     btn.text = text ? strdup(text) : NULL;
     btn.font = font;
     btn.action = action;
+    btn.click_sound = click_sound;
 
     btn.bg_color_normal = al_map_rgb(100, 100, 100);
     btn.bg_color_hover = al_map_rgb(150, 150, 150);
@@ -86,6 +89,10 @@ void handle_button_click(Button *button)
 {
     if (button && button->action)
     {
+        if (button->click_sound)
+        {
+            al_play_sample(button->click_sound, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, NULL);
+        }
         button->action();
     }
 }
